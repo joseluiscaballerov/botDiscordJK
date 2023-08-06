@@ -1,6 +1,6 @@
 const { Client, Intents, MessageAttachment } = require('discord.js');
 const { createCanvas, loadImage } = require('canvas');
-const config = require('./config.js');
+const config = require('./config/config.js');
 const TOKEN = config.token;
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES] });
