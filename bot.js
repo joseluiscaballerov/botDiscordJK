@@ -1,32 +1,20 @@
 const { Client, Intents, MessageAttachment } = require('discord.js');
 const { createCanvas, loadImage } = require('canvas');
 const config = require('./config.js');
-const express = require('express');
 
 const TOKEN = config.token;
-const PORT = process.env.PORT || 3000; // Usar el puerto proporcionado por Heroku o el puerto 3000 si se ejecuta localmente
-
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES] });
-const app = express();
 
-// Mensaje de bienvenida que se enviará a los nuevos usuarios
 const MENSAJE_BIENVENIDA = `
 ¡Hola! ¡Te doy la bienvenida :hugging:!
-
 ¡No olvides que no debes compartir el enlace al servidor para que nadie gente se una! :fire:
-
 Disfruta y pásatelo bien con los de siempre!. :rocket:
-
 Instagram ▶ https://www.instagram.com/joseluiscaballerow
 X ▶ https://www.x.com/josecaballerow
 `;
 
 client.once('ready', () => {
   console.log(`Bot conectado como ${client.user.tag}`);
-  // El bot está listo, así que ahora escuchemos en el puerto proporcionado por Heroku
-  app.listen(PORT, () => {
-    console.log(`Servidor escuchando en el puerto ${PORT}`);
-  });
 });
 
 client.on('guildMemberAdd', async (member) => {
@@ -60,5 +48,4 @@ client.on('guildMemberAdd', async (member) => {
         .catch((error) => console.error(`No se pudo enviar el mensaje directo a ${member.user.tag}. Error: ${error}`));
 });
 
-// Iniciar sesión en Discord con el token del bot
 client.login(TOKEN);
